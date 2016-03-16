@@ -8,12 +8,10 @@ class Genius
     end
 
     def rand_color
-        color = rand(4)
+        index = rand(4)
+        colors = ['Red', 'Green', 'Yellow', 'Blue']
 
-        return 'Red'    if color.eql?(0)
-        return 'Green'  if color.eql?(1)
-        return 'Yellow' if color.eql?(2)
-        return 'Blue'   if color.eql?(3)
+        return colors[index]
     end
 
     def add_color
