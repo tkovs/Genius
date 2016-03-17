@@ -1,14 +1,12 @@
 class Table
-    attr_reader(:sequence, :colors, :points)
-
     def initialize
         @points = 0
-        @sequence = Array.new
+        @combination = Array.new
         @colors = ['Red', 'Green', 'Yellow', 'Blue']
     end
 
     def add
-        @sequence.push(@colors[rand(4)])
+        @combination.push(@colors[rand(4)])
     end
 
     def hit
@@ -16,14 +14,18 @@ class Table
     end
 
     def started?
-        return !@sequence.empty?
+        return !@combination.empty?
     end
 
     def last_color
-        return @sequence[-1]
+        return @combination[-1]
     end
 
     def score
         return @points
+    end
+
+    def sequence
+        return @combination
     end
 end

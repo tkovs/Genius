@@ -39,6 +39,6 @@ class Genius
     def play
         game_loop
 
-        puts 'You did ' + @table.score.to_s
+        puts 'You did ' + @table.score.to_s + ' points!'
     end
 end
