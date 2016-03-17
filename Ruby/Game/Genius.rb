@@ -1,59 +1,44 @@
+require_relative 'Table'
+
 class Genius
-    Sequence = Struct.new(:index, :color)
-    attr_reader(:sequence, :points)
+    attr_reader(:table)
 
     def initialize
-        @sequence = Array.new
-        @points = 0
-    end
-
-    def rand_color
-        index = rand(4)
-        colors = ['Red', 'Green', 'Yellow', 'Blue']
-
-        return colors[index]
-    end
-
-    def add_color
-        index = 1
-        index = (@sequence.last.index + 1) unless @sequence.empty?
-
-        @sequence.push(Sequence.new(index, rand_color))
+        @table = Table.new
     end
 
     def color_input
-        @sequence.each do |element|
-            puts 'Color with index ' + element.index.to_s + ':'
-            input = gets.chomp
-            success = element.color.downcase.eql?(input.downcase)
+        success = false
 
-            return false unless success.eql?(true)
+        @table.sequence.each_with_index do |color, index|
+            puts 'Color with index ' + index.to_s + ':'
+            input = gets.chomp
+            success = color.downcase.eql?(input.downcase)
+
+            break if success.eql?(false)
         end
 
-        return true
+        return success
     end
 
     def game_loop
         begin
-            if (@sequence.empty?)
+            if !@table.started? then
                 puts '-- Starting round --'
             else
-                @points += 1
-                puts 'Points: ' + @points.to_s
+                puts 'Points: ' + @table.score.to_s
             end
 
-            add_color
-            puts 'Last color: ' + @sequence.last.color
+            @table.add
+            puts 'Last color: ' + @table.last_color
             success = color_input
+            @table.hit if success.eql?(true)
         end while success
     end
 
     def play
         game_loop
 
-        puts 'You did ' + @points.to_s
-        puts 'Press anything to continue Genius Game'
-        gets
-        initialize and self.play
+        puts 'You did ' + @table.score.to_s
     end
 end
