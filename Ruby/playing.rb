@@ -1,4 +1,3 @@
 require_relative 'Game/Genius'
 
-game = Genius.new
-game.play
+Genius.new.play

@@ -1,44 +1,38 @@
 require_relative 'Table'
 
 class Genius
-    attr_reader(:table)
-
     def initialize
-        @table = Table.new
+        @table = Table.new(%w[Red Green Yellow Blue]);
     end
 
     def color_input
-        success = false
-
         @table.sequence.each_with_index do |color, index|
-            puts 'Color with index ' + index.to_s + ':'
+            print "Color with index #{index}:\n> "
             input = gets.chomp
-            success = color.downcase.eql?(input.downcase)
 
-            break if success.eql?(false)
+            return false unless color.downcase.eql?(input.downcase)
         end
 
-        return success
+        @table.hit
+        return true
     end
 
     def game_loop
         begin
-            if !@table.started? then
+            unless @table.started?
                 puts '-- Starting round --'
             else
-                puts 'Points: ' + @table.score.to_s
+                puts "-- Points: #{@table.score} --"
             end
 
             @table.add
-            puts 'Last color: ' + @table.last_color
-            success = color_input
-            @table.hit if success.eql?(true)
-        end while success
+            puts "Last color: #{@table.last_color}"
+        end while color_input
     end
 
     def play
         game_loop
 
-        puts 'You did ' + @table.score.to_s + ' points!'
+        puts "You did #{@table.score} points!"
     end
 end

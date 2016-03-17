@@ -1,12 +1,12 @@
 class Table
-    def initialize
+    def initialize(items)
         @points = 0
         @combination = Array.new
-        @colors = ['Red', 'Green', 'Yellow', 'Blue']
+        @items  = items
     end
 
     def add
-        @combination.push(@colors[rand(4)])
+        @combination.push(@items.sample)
     end
 
     def hit
@@ -14,18 +14,18 @@ class Table
     end
 
     def started?
-        return !@combination.empty?
+        !@combination.empty?
     end
 
     def last_color
-        return @combination[-1]
+        @combination.last
     end
 
     def score
-        return @points
+        @points
     end
 
     def sequence
-        return @combination
+        @combination
     end
 end

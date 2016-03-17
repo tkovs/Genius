@@ -4,8 +4,7 @@ Starting:
 ```ruby
 require_relative 'Genius'
 
-game = Genius.new
-game.play
+Genius.new.play
 ```
 
-Based on [Haskell-Genius](https://github.com/G4BB3R/Haskell-Genius)
+"Based" on [Haskell-Genius](https://github.com/G4BB3R/Haskell-Genius)
