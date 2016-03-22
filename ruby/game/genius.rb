@@ -1,4 +1,4 @@
-require_relative 'Table'
+require_relative 'table'
 
 class Genius
     def initialize
