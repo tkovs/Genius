@@ -1,13 +1,13 @@
-require_relative 'table'
+﻿require_relative 'table'
 
 class Genius
     def initialize
-        @table = Table.new(%w[Red Green Yellow Blue]);
+        @table = Table.new(%w[Vermelho Verde Amarelo Azul]);
     end
 
     def color_input
         @table.sequence.each_with_index do |color, index|
-            print "Color with index #{index}:\n> "
+            print "Cor de índice #{index}:\n> "
             input = gets.chomp
 
             return false unless color.downcase.eql?(input.downcase)
@@ -19,20 +19,22 @@ class Genius
 
     def game_loop
         begin
+            system "clear" or  system "cls"
+
             unless @table.started?
-                puts '-- Starting round --'
+                puts "-- Round inicial --"
             else
-                puts "-- Points: #{@table.score} --"
+                puts "-- Pontos: #{@table.score} --"
             end
 
             @table.add
-            puts "Last color: #{@table.last_color}"
+            puts "Cor sorteada: #{@table.last_color}"
         end while color_input
     end
 
     def play
         game_loop
 
-        puts "You did #{@table.score} points!"
+        puts "Você conseguiu #{@table.score} pontos!"
     end
 end
